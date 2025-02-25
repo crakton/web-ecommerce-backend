@@ -32,12 +32,12 @@ app.use(
 			"http://localhost:3000",
 			"*.merabestie.com",
 			"https://www.web-ecommerce-gray.vercel.app/",
-			"*.vercel.app/",
 		],
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 		allowedHeaders: [
 			"Content-Type",
 			"Authorization",
+			"XMLHttpRequest",
 			"X-Requested-With",
 			"X-Api-Key",
 			"X-Api-HMAC-SHA256",
