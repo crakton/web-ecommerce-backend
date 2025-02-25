@@ -25,25 +25,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Middleware
 app.use(express.json());
-app.use(
-	cors({
-		origin: [
-			"https://www.merabestie.com",
-			"http://localhost:3000",
-			"*.merabestie.com",
-			"https://www.web-ecommerce-gray.vercel.app/",
-		],
-		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-		allowedHeaders: [
-			"Content-Type",
-			"Authorization",
-			"XMLHttpRequest",
-			"X-Requested-With",
-			"X-Api-Key",
-			"X-Api-HMAC-SHA256",
-		],
-	})
-);
+app.use(cors());
 
 // Routes
 app.use("/auth", authRoutes);
