@@ -31,7 +31,8 @@ app.use(
 			"https://www.merabestie.com",
 			"http://localhost:3000",
 			"*.merabestie.com",
-			"https://web-ecommerce-gray.vercel.app/",
+			"https://www.web-ecommerce-gray.vercel.app/",
+			"*.vercel.app/",
 		],
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 		allowedHeaders: [
