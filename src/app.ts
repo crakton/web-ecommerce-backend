@@ -158,6 +158,15 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 		error: process.env.NODE_ENV === "development" ? err.message : undefined,
 	});
 });
+// Error handling middleware
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+	console.error(err.stack);
+	res.status(500).json({
+		success: false,
+		message: "Something went wrong!",
+		error: process.env.NODE_ENV === "production" ? "Server error" : err.message,
+	});
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
