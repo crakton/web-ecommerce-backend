@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>API Endpoint Documentation</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="api-endpoint-documentation">API Endpoint Documentation</h1>
+<p>This document outlines all available API endpoints for the backend application.</p>
+<h2 id="authentication-auth">Authentication (<code>/auth</code>)</h2>
+<h3 id="post-authregister"><code>POST /auth/register</code></h3>
+<ul>
+<li><strong>Description:</strong> Registers a new user.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires user data (e.g., username, email, password). (Specific structure not defined in provided code, but will need to be present)</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not required.</li>
+</ul>
+<h3 id="post-authlogin"><code>POST /auth/login</code></h3>
+<ul>
+<li><strong>Description:</strong> Logs in an existing user.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires user credentials (e.g., email, password).</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not required.</li>
+</ul>
+<h3 id="put-authupdateuserid"><code>PUT /auth/update/:userId</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates a user's information.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user to update.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires the user's updated data.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-authchange-passworduserid"><code>PUT /auth/change-password/:userId</code></h3>
+<ul>
+<li><strong>Description:</strong> Changes a user's password.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user changing their password.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires the user's current password and new password.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-authprofileuserid"><code>GET /auth/profile/:userId</code></h3>
+<ul>
+<li><strong>Description:</strong> Retrieves a user's profile information.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user whose profile is requested.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-authupdate-statususerid"><code>PUT /auth/update-status/:userId</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates a user's account status (e.g., active/inactive).</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user whose status is being updated.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires the new account status.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="cart-carts">Cart (<code>/carts</code>)</h2>
+<h3 id="post-cartsadd"><code>POST /carts/add</code></h3>
+<ul>
+<li><strong>Description:</strong> Adds an item to the cart.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires product ID and quantity.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-cartsitems"><code>GET /carts/items</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets all items from the cart.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-cartsupdate-qty"><code>PUT /carts/update-qty</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates the quantity of an item in the cart.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires product ID and new quantity.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="delete-cartsremoveuseridproductid"><code>DELETE /carts/remove/:userId/:productId</code></h3>
+<ul>
+<li><strong>Description:</strong> Removes a specific item from the cart.</li>
+<li><strong>Method:</strong> <code>DELETE</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user whose cart is being modified.</li>
+<li><code>productId</code>: The ID of the product to remove.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-cartsuserid"><code>GET /carts/:userId</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets the entire cart for a specific user.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user whose cart is requested.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="delete-cartsclearuserid"><code>DELETE /carts/clear/:userId</code></h3>
+<ul>
+<li><strong>Description:</strong> Clears the cart for a specific user.</li>
+<li><strong>Method:</strong> <code>DELETE</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user whose cart is being cleared.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="complaints-complaints">Complaints (<code>/complaints</code>)</h2>
+<h3 id="post-complaintspost-complaints"><code>POST /complaints/post-complaints</code></h3>
+<ul>
+<li><strong>Description:</strong> Creates a new complaint.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires complaint data. (Specific structure not defined in provided code, but will need to be present)</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-complaintsget-complaints"><code>GET /complaints/get-complaints</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets all complaints.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-complaintsupdate-complaint-status"><code>PUT /complaints/update-complaint-status</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates the status of a complaint.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires <code>complaintId</code> and <code>status</code>.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="coupons-coupons">Coupons (<code>/coupons</code>)</h2>
+<h3 id="get-couponsget-coupons"><code>GET /coupons/get-coupons</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets all coupons.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="post-couponssave-coupons"><code>POST /coupons/save-coupons</code></h3>
+<ul>
+<li><strong>Description:</strong> Creates a new coupon.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires coupon data.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="delete-couponsdelete-coupons"><code>DELETE /coupons/delete-coupons</code></h3>
+<ul>
+<li><strong>Description:</strong> Deletes a coupon.</li>
+<li><strong>Method:</strong> <code>DELETE</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires <code>couponId</code> to delete specific coupon.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-couponsupdate-status"><code>PUT /coupons/update-status</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates the status of a coupon (e.g., active/inactive).</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires <code>couponId</code> and <code>status</code></li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="post-couponsverify-coupons"><code>POST /coupons/verify-coupons</code></h3>
+<ul>
+<li><strong>Description:</strong> Verifies if a coupon is valid.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires coupon code and possibly other relevant data.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="images-platforms">Images (<code>/platforms</code>)</h2>
+<h3 id="post-platformsimage-upload"><code>POST /platforms/image-upload</code></h3>
+<ul>
+<li><strong>Description:</strong> Uploads an image.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires an <code>image</code> file to be uploaded.</li>
+</ul>
+</li>
+<li><strong>Form Data:</strong>
+<ul>
+<li><code>image</code>: The image file.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="orders-orders">Orders (<code>/orders</code>)</h2>
+<h3 id="post-ordersnew"><code>POST /orders/new</code></h3>
+<ul>
+<li><strong>Description:</strong> Creates a new order.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires order data.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-ordersorderid"><code>GET /orders/:orderId</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets a specific order by its ID.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>orderId</code>: The ID of the order to retrieve.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-ordersusersuseridorders"><code>GET /orders/users/:userId/orders</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets all orders for a specific user.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user whose orders are being retrieved.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-ordersorderidstatus"><code>PUT /orders/:orderId/status</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates the status of an order.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>orderId</code>: The ID of the order to update.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires the new order status.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="products-products">Products (<code>/products</code>)</h2>
+<h3 id="post-productsnew"><code>POST /products/new</code></h3>
+<ul>
+<li><strong>Description:</strong> Creates a new product.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires product data (e.g., name, description, price).</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-products"><code>GET /products</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets all products.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-productsproductid"><code>GET /products/:productId</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets a specific product by its ID.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>productId</code>: The ID of the product to retrieve.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-productsproductid"><code>PUT /products/:productId</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates a specific product.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>productId</code>: The ID of the product to update.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires updated product data.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="delete-productsproductid"><code>DELETE /products/:productId</code></h3>
+<ul>
+<li><strong>Description:</strong> Deletes a specific product.</li>
+<li><strong>Method:</strong> <code>DELETE</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>productId</code>: The ID of the product to delete.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="patch-productsproductidstock"><code>PATCH /products/:productId/stock</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates the stock of a specific product.</li>
+<li><strong>Method:</strong> <code>PATCH</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>productId</code>: The ID of the product to update.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires the new stock quantity.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="patch-productsproductidvisibility"><code>PATCH /products/:productId/visibility</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates the visibility of a specific product.</li>
+<li><strong>Method:</strong> <code>PATCH</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>productId</code>: The ID of the product to update.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires the new visibility status.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-productssearch"><code>GET /products/search</code></h3>
+<ul>
+<li><strong>Description:</strong> Searches for products based on search criteria.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Query parameters:</strong>
+<ul>
+<li>Requires search criteria to be present.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="reviews-reviews">Reviews (<code>/reviews</code>)</h2>
+<h3 id="post-reviewsnew"><code>POST /reviews/new</code></h3>
+<ul>
+<li><strong>Description:</strong> Creates a new review.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires review data (e.g., product ID, user ID, rating, comment).</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-reviewsproductproductid"><code>GET /reviews/product/:productId</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets all reviews for a specific product.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>productId</code>: The ID of the product whose reviews are requested.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="get-reviewsuseruserid"><code>GET /reviews/user/:userId</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets all reviews written by a specific user.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>userId</code>: The ID of the user whose reviews are requested.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="put-reviewsreviewid"><code>PUT /reviews/:reviewId</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates a specific review.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>reviewId</code>: The ID of the review to update.</li>
+</ul>
+</li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires updated review data.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h3 id="delete-reviewsreviewid"><code>DELETE /reviews/:reviewId</code></h3>
+<ul>
+<li><strong>Description:</strong> Deletes a specific review.</li>
+<li><strong>Method:</strong> <code>DELETE</code></li>
+<li><strong>Path Parameters:</strong>
+<ul>
+<li><code>reviewId</code>: The ID of the review to delete.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+<h2 id="sellers-sellers">Sellers (<code>/sellers</code>)</h2>
+<h3 id="post-sellersregister"><code>POST /sellers/register</code></h3>
+<ul>
+<li><strong>Description:</strong> Registers a new seller.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires seller data (e.g., name, email, password).</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not required.</li>
+</ul>
+<h3 id="post-sellerslogin"><code>POST /sellers/login</code></h3>
+<ul>
+<li><strong>Description:</strong> Logs in an existing seller.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires seller credentials (e.g., email, password).</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not required.</li>
+</ul>
+<h3 id="post-sellersverify-otp"><code>POST /sellers/verify-otp</code></h3>
+<ul>
+<li><strong>Description:</strong> Verifies OTP for seller.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires <code>OTP</code> and other fields that might be relevant.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not required.</li>
+</ul>
+<h3 id="post-sellersresend-otp"><code>POST /sellers/resend-otp</code></h3>
+<ul>
+<li><strong>Description:</strong> Resends OTP for seller.</li>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires <code>email</code> or other relevant fields.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not required.</li>
+</ul>
+<h3 id="get-sellersprofile"><code>GET /sellers/profile</code></h3>
+<ul>
+<li><strong>Description:</strong> Gets the seller's profile.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> fields.
+<strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+</li>
+</ul>
+<h3 id="put-sellersupdate-profile"><code>PUT /sellers/update-profile</code></h3>
+<ul>
+<li><strong>Description:</strong> Updates the seller's profile.</li>
+<li><strong>Method:</strong> <code>PUT</code></li>
+<li><strong>Request Body:</strong>
+<ul>
+<li>Requires updated seller data.</li>
+</ul>
+</li>
+<li><strong>Response Body:</strong>
+<ul>
+<li>will return <code>success</code> and <code>message</code> <code>data</code></li>
+<li>fields.</li>
+</ul>
+</li>
+<li><strong>Authentication:</strong> Not defined in provided code but most likely required.</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

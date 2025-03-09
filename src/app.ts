@@ -29,10 +29,10 @@ app.use(cors());
 
 // Routes
 app.use("/auth", authRoutes);
-app.use("/cart", cartRoutes);
+app.use("/carts", cartRoutes);
 app.use("/complaints", complaintRoutes);
 app.use("/coupons", couponRoutes);
-app.use("/images", imageRoutes);
+app.use("/platforms", imageRoutes);
 app.use("/orders", orderRoutes);
 app.use("/products", productRoutes);
 app.use("/reviews", reviewRoutes);
