@@ -1,18 +1,17 @@
-import { Router } from "express";
+import express, { Router } from "express";
 import { OrderController } from "../controllers/order.controller";
 
 const router = Router();
 const orderController = new OrderController();
 
-router.post("/new", orderController.createOrder.bind(orderController));
-router.get("/:orderId", orderController.getOrder.bind(orderController));
-router.get(
-	"/users/:userId/orders",
-	orderController.getUserOrders.bind(orderController)
-);
-router.put(
-	"/:orderId/status",
-	orderController.updateOrderStatus.bind(orderController)
-);
+// Checkout and payment routes
+router.post("/checkout", orderController.initiateCheckout);
+// router.post("/process-payment", orderController.processPayment);
+// router.get("/confirm-payment/:reference", orderController.confirmPayment);
+
+// Order management routes
+router.get("/:orderId", orderController.getOrder);
+router.get("/user/:userId", orderController.getUserOrders);
+router.patch("/:orderId/status", orderController.updateOrderStatus);
 
 export default router;

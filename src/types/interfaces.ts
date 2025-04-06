@@ -67,13 +67,22 @@ export interface IOrder extends Document {
 	email: string;
 	name: string;
 	productIds: string[];
+	products: {
+		productId: string;
+		name: string;
+		price: number;
+		quantity: number;
+		img: string[];
+		category: string;
+	}[];
 	trackingId?: string;
 	price: number;
 	status: "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled";
-	paymentMethod?: "Credit Card" | "Debit Card" | "Net Banking" | "UPI" | "COD";
-	paymentStatus: "Paid" | "Unpaid" | "Refunded" | "Pending";
+	paymentStatus: "Paid" | "Unpaid" | "Failed" | "Refunded" | "Pending";
 	createdAt: Date;
 	updatedAt?: Date;
+	paymentMethod?: "Credit Card" | "Debit Card" | "Net Banking" | "UPI" | "COD";
+	paymentReference?: string;
 }
 
 export interface IProduct extends Document {
