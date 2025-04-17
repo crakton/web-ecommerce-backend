@@ -16,7 +16,7 @@ router.get(
 	reviewController.getAllReviews.bind(reviewController)
 );
 router.get("/user/:userId", reviewController.getUserReviews);
-router.put("/:reviewId", reviewController.updateReview);
+router.put("/:reviewId", authenticateSeller, reviewController.updateReview);
 router.delete("/:reviewId", authenticateSeller, reviewController.deleteReview);
 
 export default router;
