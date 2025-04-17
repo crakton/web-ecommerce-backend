@@ -6,20 +6,48 @@ const router = express.Router();
 const sellerController = new SellerController();
 
 // Public routes
-router.post("/register", sellerController.register);
-router.post("/login", sellerController.login);
-router.post("/verify-otp", sellerController.verifyOtp);
-router.post("/resend-otp", sellerController.resendOtp);
+router.post("/register", sellerController.register.bind(sellerController));
+router.post("/login", sellerController.login.bind(sellerController));
+router.post("/verify-otp", sellerController.verifyOtp.bind(sellerController));
+router.post("/resend-otp", sellerController.resendOtp.bind(sellerController));
 
 // Protected routes (require authentication)
-router.get("/profile", authenticateSeller, sellerController.getProfile);
-router.put("/profile", authenticateSeller, sellerController.updateProfile);
+router.get(
+	"/profile",
+	authenticateSeller,
+	sellerController.getProfile.bind(sellerController)
+);
+router.put(
+	"/profile",
+	authenticateSeller,
+	sellerController.updateProfile.bind(sellerController)
+);
 router.post(
 	"/change-password",
 	authenticateSeller,
-	sellerController.changePassword
+	sellerController.changePassword.bind(sellerController)
 );
-router.post("/logout", authenticateSeller, sellerController.logout);
-router.delete("/account", authenticateSeller, sellerController.deleteAccount);
+router.post(
+	"/logout",
+	authenticateSeller,
+	sellerController.logout.bind(sellerController)
+);
+router.delete(
+	"/account",
+	authenticateSeller,
+	sellerController.deleteAccount.bind(sellerController)
+);
+
+// controlling users
+router.get(
+	"/users",
+	authenticateSeller,
+	sellerController.getAllUsers.bind(sellerController)
+);
+router.get(
+	"/orders",
+	authenticateSeller,
+	sellerController.getAllOrders.bind(sellerController)
+);
 
 export default router;

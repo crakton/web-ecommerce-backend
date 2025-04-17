@@ -12,3 +12,10 @@ export enum ELoginStatus {
 	LOGGED_IN = "loggedin",
 	LOGGED_OUT = "loggedout",
 }
+
+// Define the Role
+export enum ERole {
+	"ADMIN" = "admin",
+	"MANAGER" = "manager",
+	"SELLER" = "seller",
+}

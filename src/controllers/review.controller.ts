@@ -121,8 +121,29 @@ export class ReviewController {
 			);
 
 			res.status(200).json({ message: "Review deleted successfully" });
+			return;
 		} catch (error) {
-			res.status(500).json({ message: "Error deleting review", error });
+			res
+				.status(500)
+				.json({ message: "Error deleting review", error, status: false });
+		}
+	}
+
+	public async getAllReviews(req: Request, res: Response): Promise<void> {
+		try {
+			const reviews = await Review.find().sort({ createdAt: -1 });
+			res
+				.status(200)
+				.json({
+					reviews,
+					message: "Reviews fetched successfully",
+					status: true,
+				});
+			return;
+		} catch (error) {
+			res
+				.status(500)
+				.json({ message: "Error fetching reviews", error, status: false });
 		}
 	}
 }

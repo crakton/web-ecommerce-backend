@@ -1,5 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import { EBusinessType, ELoginStatus } from "../enums";
+import { EBusinessType, ELoginStatus, ERole } from "../enums";
 
 export interface ShiprocketAuthResponse {
 	token: string;
@@ -146,8 +146,9 @@ export interface ISeller extends Document {
 	phoneNumber: string;
 	businessName: string;
 	businessAddress: string;
-	EbusinessType: EBusinessType;
+	businessType?: EBusinessType;
 	otp?: string;
+	role: ERole;
 	loggedIn: ELoginStatus;
 	comparePassword(password: string): Promise<boolean>;
 }

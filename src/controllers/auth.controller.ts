@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { blacklistToken } from "../services/token.service";
+import UserModel from "../models/user.model";
 export class AuthController {
 	private generateToken(userId: string): string {
 		return jwt.sign({ userId }, process.env.JWT_SECRET || "your-secret-key", {
@@ -27,7 +28,7 @@ export class AuthController {
 			const hashedPassword = await bcrypt.hash(password, salt);
 
 			// Create user
-			const user = new User({
+			const user = new UserModel({
 				name,
 				email,
 				password: hashedPassword,

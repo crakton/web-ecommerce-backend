@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {
 	IChangePasswordDTO,
@@ -9,22 +10,15 @@ import {
 	IUpdateSellerDTO,
 	IVerifyOtpDTO,
 } from "../types/interfaces";
-import { Seller } from "../models";
+import { Order, Seller, User } from "../models";
 import { ELoginStatus } from "../enums";
+import { v4 as uuidv4 } from "uuid";
 
 class SellerController {
-	private generateJWT(seller: ISeller): string {
-		return jwt.sign(
-			{ id: seller._id, email: seller.email, role: "seller" },
-			process.env.JWT_SECRET || "your_jwt_secret",
-			{ expiresIn: "24h" }
-		);
-	}
-
-	private generateSellerId(): string {
-		const prefix = "SEL";
-		const randomDigits = Math.floor(10000 + Math.random() * 90000);
-		return `${prefix}${randomDigits}`;
+	private generateToken(sellerId: string): string {
+		return jwt.sign({ sellerId }, process.env.JWT_SECRET || "your-secret-key", {
+			expiresIn: "24h",
+		});
 	}
 
 	private generateOTP(): string {
@@ -42,7 +36,7 @@ class SellerController {
 			phoneNumber: seller.phoneNumber,
 			businessName: seller.businessName,
 			businessAddress: seller.businessAddress,
-			businessType: seller.EbusinessType,
+			businessType: seller.businessType!,
 		};
 	}
 
@@ -63,25 +57,27 @@ class SellerController {
 				return;
 			}
 
-			// Create new seller
+			// Hash password
+			const salt = await bcrypt.genSalt(10);
+			const hashedPassword = await bcrypt.hash(sellerData.password, salt);
+
+			// Create seller
 			const seller = new Seller({
 				...sellerData,
-				sellerId: this.generateSellerId(),
-				otp: this.generateOTP(),
+				password: hashedPassword,
+				sellerId: uuidv4(),
 			});
 
 			await seller.save();
 
-			// TODO: Send verification email with OTP
-
-			const token = this.generateJWT(seller);
+			const token = this.generateToken(seller.sellerId);
 
 			res.status(201).json({
 				success: true,
 				message: "Seller registered successfully",
 				data: {
 					token,
-					seller: this.mapSellerToResponseDTO(seller),
+					seller,
 				},
 			});
 			return;
@@ -98,51 +94,43 @@ class SellerController {
 	/**
 	 * Login seller
 	 */
+
 	public async login(req: Request, res: Response): Promise<void> {
 		try {
-			const { email, password }: ISellerLoginDTO = req.body;
+			const { email, password } = req.body;
 
-			// Find seller by email
+			// Find user
 			const seller = await Seller.findOne({ email });
 			if (!seller) {
-				res.status(404).json({
-					success: false,
-					message: "Seller not found",
-				});
+				res.status(401).json({ status: false, message: "Invalid credentials" });
 				return;
 			}
 
 			// Verify password
 			const isPasswordValid = await seller.comparePassword(password);
 			if (!isPasswordValid) {
-				res.status(401).json({
-					success: false,
-					message: "Invalid credentials",
-				});
+				res.status(401).json({ status: false, message: "Invalid credentials" });
 				return;
 			}
-
-			// Update login status
+			// Set loggedin state
 			seller.loggedIn = ELoginStatus.LOGGED_IN;
 			await seller.save();
 
-			// Generate JWT token
-			const token = this.generateJWT(seller);
+			// Generate token
+			const token = this.generateToken(seller.sellerId);
 
 			res.status(200).json({
-				success: true,
-				message: "Login successful",
-				data: {
-					token,
-					seller: this.mapSellerToResponseDTO(seller),
-				},
+				status: true,
+				token,
+				seller,
+				message: "Login successfully",
 			});
-			return;
-		} catch (error: any) {
+		} catch (error) {
+			console.error("Login error:", error);
 			res.status(500).json({
 				success: false,
 				message: "Login failed",
-				error: error.message,
+				error: error || "Unknown error occurred",
 			});
 			return;
 		}
@@ -424,6 +412,51 @@ class SellerController {
 			res.status(500).json({
 				success: false,
 				message: "Failed to delete account",
+				error: error.message,
+			});
+			return;
+		}
+	}
+
+	/**
+	 * Manage all user
+	 */
+	public async getAllUsers(req: Request, res: Response): Promise<void> {
+		try {
+			const users = await Seller.find();
+			const sellers = await User.find();
+			const allUsers = [...users, ...sellers];
+			res.status(200).json({
+				success: true,
+				message: "Users retrieved successfully",
+				data: allUsers,
+			});
+			return;
+		} catch (error: any) {
+			res.status(500).json({
+				success: false,
+				message: "Failed to fetch users account",
+				error: error.message,
+			});
+			return;
+		}
+	}
+	/**
+	 * Manage all users order
+	 */
+	public async getAllOrders(req: Request, res: Response): Promise<void> {
+		try {
+			const orders = await Order.find();
+			res.status(200).json({
+				success: true,
+				message: "Orders retrieved successfully",
+				data: orders,
+			});
+			return;
+		} catch (error: any) {
+			res.status(500).json({
+				success: false,
+				message: "Failed to fetch orders account",
 				error: error.message,
 			});
 			return;

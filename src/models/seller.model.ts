@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-import { EBusinessType, ELoginStatus } from "../enums";
+import { EBusinessType, ELoginStatus, ERole } from "../enums";
 import { ISeller } from "../types/interfaces";
 
 // Create the schema
@@ -14,10 +14,11 @@ const SellerSchema = new Schema<ISeller>({
 	phoneNumber: { type: String, required: true },
 	businessName: { type: String, required: true },
 	businessAddress: { type: String, required: true },
-	EbusinessType: {
+	businessType: {
 		type: String,
 		required: true,
 		enum: Object.values(EBusinessType),
+		default: EBusinessType.RETAIL,
 	},
 	otp: { type: String },
 	loggedIn: {
@@ -25,20 +26,7 @@ const SellerSchema = new Schema<ISeller>({
 		enum: Object.values(ELoginStatus),
 		default: ELoginStatus.LOGGED_OUT,
 	},
-});
-
-// Hash password before saving
-SellerSchema.pre("save", async function (next) {
-	// Only hash the password if it has been modified (or is new)
-	if (!this.isModified("password")) return next();
-
-	try {
-		const salt = await bcrypt.genSalt(10);
-		this.password = await bcrypt.hash(this.password, salt);
-		next();
-	} catch (error: any) {
-		next(error);
-	}
+	role: { type: String, default: ERole.SELLER },
 });
 
 // Method to compare password

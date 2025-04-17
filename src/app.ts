@@ -69,7 +69,7 @@ app.use("/platforms", imageRoutes);
 app.use("/orders", orderRoutes);
 app.use("/products", productRoutes);
 app.use("/reviews", reviewRoutes);
-app.use("/sellers", sellerRoutes);
+app.use("/admin", sellerRoutes);
 app.use("/upload", uploadRoutes);
 app.use("/payments", paymentRoutes);
 
