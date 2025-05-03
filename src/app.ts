@@ -14,6 +14,7 @@ import reviewRoutes from "./routes/review.route";
 import sellerRoutes from "./routes/seller.route";
 import uploadRoutes from "./routes/image.route";
 import paymentRoutes from "./routes/payment.route";
+import blogRoutes from "./routes/blog.route";
 import fileUpload from "express-fileupload";
 import fs from "fs";
 import path from "path";
@@ -72,7 +73,7 @@ app.use("/reviews", reviewRoutes);
 app.use("/admin", sellerRoutes);
 app.use("/upload", uploadRoutes);
 app.use("/payments", paymentRoutes);
-
+app.use("/blogs", blogRoutes);
 interface ShiprocketOrderRequest {
 	cart_data: {
 		items: Array<{
